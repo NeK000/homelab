@@ -1,4 +1,4 @@
-- name: Install ned-font
+- name: Install nerd-font
   ansible.builtin.shell: "brew install --cask font-ubuntu-nerd-font"
   args:
     executable: /bin/bash  
