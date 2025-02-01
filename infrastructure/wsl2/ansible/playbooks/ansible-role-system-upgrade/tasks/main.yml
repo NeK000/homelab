@@ -13,6 +13,31 @@
     name: bash-completion
     state: present
 
+- name: Install curl
+  ansible.builtin.apt:
+    name: curl
+    state: present
+
+- name: Install build-essential
+  ansible.builtin.apt:
+    name: build-essential 
+    state: present
+
+- name: Install procps 
+  ansible.builtin.apt:
+    name: procps 
+    state: present
+
+- name: Install file  
+  ansible.builtin.apt:
+    name: file  
+    state: present
+
+- name: Install procps 
+  ansible.builtin.apt:
+    name: procps 
+    state: present
+
 - name: Enable docker completion for bash
   become: false
   ansible.builtin.lineinfile:

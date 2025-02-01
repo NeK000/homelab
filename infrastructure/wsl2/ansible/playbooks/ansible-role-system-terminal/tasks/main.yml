@@ -1,3 +1,8 @@
+- name: Install ned-font
+  ansible.builtin.shell: "brew install --cask font-ubuntu-nerd-font"
+  args:
+    executable: /bin/bash  
+
 - name: Download Starship
   ansible.builtin.shell: curl -sS https://starship.rs/install.sh -o ~/install.sh
   args:
@@ -30,6 +35,6 @@
 - name: Download starship.toml from Gist
   become: false
   ansible.builtin.get_url:
-    url: "https://gist.githubusercontent.com/NeK000/32e78fcb3f0bdb44e738d85dce7fdb88/raw/f8892e251887c1c245962a0ca5dca4ba078466f1/starship.toml"
+    url: "https://gist.githubusercontent.com/NeK000/32e78fcb3f0bdb44e738d85dce7fdb88/raw/3bf56038cf025973a7cf9e9524ccc5606b0cb37e/starship.toml"
     dest: "~/.config/starship.toml"
     mode: '0644'
