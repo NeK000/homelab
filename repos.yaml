@@ -2,4 +2,6 @@ repos:
   - owner: NeK000
     repo: homelab-teslamate
     branch: main
-  # Add more repositories as needed
+  - owner: NeK000
+    repo: homelab-network
+    branch: main
