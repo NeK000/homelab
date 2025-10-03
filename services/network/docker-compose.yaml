@@ -1,0 +1,32 @@
+services:
+  network-tsdproxy:
+    image: "almeidapaulopt/tsdproxy:1.4.7"
+    container_name: "tsdproxy"
+    restart: "unless-stopped"
+    labels:
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:${PORT_NETWORK_TSDPROXY}]"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/dkaser/unraid-plugins/main/tsdproxy.png"
+    ports:
+      - "${PORT_NETWORK_TSDPROXY}:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/mnt/user/appdata/tower/tsdproxy:/data"
+      - "/mnt/user/appdata/tower/tsdproxy-config:/config"
+
+  network-librespeed:
+    image: "lscr.io/linuxserver/librespeed:5.4.20240804"
+    container_name: "librespeed"
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.name: "${TAILSCALE_LIBRESPEED}"
+      tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "${PORT_NETWORK_LIBRESPEED}"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:${PORT_NETWORK_LIBRESPEED}]"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/devzwf/unraid-docker-templates/main/images/myspeed_logo.png"
+    ports:
+      - "${PORT_NETWORK_LIBRESPEED}:80"
+    environment:
+      - "MODE=standalone"
+    restart: "unless-stopped"
