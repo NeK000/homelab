@@ -5,3 +5,6 @@ repos:
   - owner: NeK000
     repo: homelab-network
     branch: main
+  - owner: NeK000
+    repo: homelab-llama
+    branch: main
