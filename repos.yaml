@@ -8,3 +8,6 @@ repos:
   - owner: NeK000
     repo: homelab-llama
     branch: main
+  - owner: NeK000
+    repo: homelab-immich
+    branch: main
