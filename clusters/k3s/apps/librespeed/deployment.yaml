@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: librespeed
+  namespace: librespeed
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: librespeed
+  template:
+    metadata:
+      labels:
+        app: librespeed
+    spec:
+      containers:
+        - name: librespeed
+          image: lscr.io/linuxserver/librespeed:5.4.20240804
+          ports:
+            - containerPort: 80
+          env:
+            - name: MODE
+              value: "standalone"
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: librespeed
+  namespace: librespeed
+spec:
+  selector:
+    app: librespeed
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: librespeed
+  namespace: librespeed
+spec:
+  defaultBackend:
+    service:
+      name: librespeed
+      port:
+        number: 80
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - librespeed

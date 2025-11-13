@@ -93,7 +93,6 @@ services:
 
     volumes:
       - "/mnt/user/appdata/karakeep/meilisearch:/meili_data"
-
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
@@ -114,7 +113,6 @@ services:
       - 3003:3000
     volumes:
       - "/mnt/user/appdata/homepage:/app/config"
-
   dozzle:
     image: amir20/dozzle:latest
     container_name: dozzle
