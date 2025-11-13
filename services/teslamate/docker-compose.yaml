@@ -1,6 +1,6 @@
 services:
   teslamate-teslamate:
-    image: "teslamate/teslamate:2.1.1"
+    image: "teslamate/teslamate:2.2.0"
     container_name: "Teslamate"
     restart: "always"
     labels:
