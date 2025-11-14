@@ -1,0 +1,94 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: shared-postgres
+  namespace: postgres
+spec:
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+
+  # Reference your custom password secret
+  bootstrap:
+    initdb:
+      database: postgres
+      owner: postgres
+      secret:
+        name: postgres-superuser
+
+  # Storage configuration - using local-path for database performance
+  storage:
+    storageClass: local-path
+    size: 20Gi
+
+  # PostgreSQL configuration
+  postgresql:
+    parameters:
+      max_connections: "300"
+      shared_buffers: "256MB"
+      effective_cache_size: "1GB"
+      maintenance_work_mem: "128MB"
+      checkpoint_completion_target: "0.9"
+      wal_buffers: "16MB"
+      default_statistics_target: "100"
+      random_page_cost: "1.1"
+      effective_io_concurrency: "200"
+      work_mem: "2MB"
+      min_wal_size: "1GB"
+      max_wal_size: "4GB"
+
+  # High availability configuration
+  replica:
+    minSyncReplicas: 1
+    maxSyncReplicas: 2
+
+  # Monitoring
+  monitoring:
+    enabled: true
+    podMonitorEnabled: true
+
+  # Backup configuration to NFS using your storage class
+  backup:
+    retentionPolicy: "30d"
+    barmanObjectStore:
+      destinationPath: "file:///backup"
+      serverName: "shared-postgres"
+      wal:
+        compression: gzip
+        maxParallel: 2
+      data:
+        compression: gzip
+        jobs: 2
+    volumeSnapshot:
+      className: ""
+
+  # Resources
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "2Gi"
+      cpu: "1000m"
+
+  # Node affinity - prefer 8GB nodes
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          preference:
+            matchExpressions:
+              - key: node.kubernetes.io/instance-type
+                operator: In
+                values:
+                  - "8gb"
+
+  # Additional volumes for backups
+  additionalVolumes:
+    - name: backup-volume
+      persistentVolumeClaim:
+        claimName: postgres-backup-pvc
+
+  # Mount backup volume
+  additionalVolumeMounts:
+    - name: backup-volume
+      mountPath: /backup

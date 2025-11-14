@@ -1,0 +1,12 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: daily-backup
+  namespace: postgres
+spec:
+  schedule: "0 2 * * *"  # 2 AM daily
+  backupOwnerReference: self
+  cluster:
+    name: shared-postgres
+  immediate: true
+  method: barmanObjectStore
