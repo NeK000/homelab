@@ -8,6 +8,8 @@ if [ ! -f my.env ]; then
   echo "❌ Error: .env file not found"
   exit 1
 fi
+echo "Remove trailing spaces from my.env"
+sed -i 's/[[:space:]]*$//' my.env
 
 # Find the sealed-secrets pod
 echo "🔍 Finding Sealed Secrets controller..."
