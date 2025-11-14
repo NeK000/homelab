@@ -29,7 +29,7 @@ spec:
             - name: HOMEPAGE_ALLOWED_HOSTS
               valueFrom:
                 secretKeyRef:
-                  name: homepage-secrets
+                  name: secrets
                   key: TAILSCALE_HOMEPAGE_URL
           volumeMounts:
             - name: homepage-config

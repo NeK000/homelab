@@ -76,7 +76,7 @@ spec:
             - name: MEILI_MASTER_KEY
               valueFrom:
                 secretKeyRef:
-                  name: karakeep-secrets
+                  name: secrets
                   key: MEILI_MASTER_KEY
           volumeMounts:
             - name: meili-data
@@ -141,7 +141,7 @@ spec:
             - name: NEXTAUTH_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: karakeep-secrets
+                  name: secrets
                   key: NEXTAUTH_SECRET
           volumeMounts:
             - name: karakeep-data
