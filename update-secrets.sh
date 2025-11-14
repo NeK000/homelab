@@ -38,7 +38,7 @@ metadata:
   annotations:
     reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
     reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
-    reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "mealie,karakeep,actual,homepage,postgres"
+    reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "mealie,karakeep,actual,homepage,postgres,vaultwarden"
 type: Opaque
 stringData:
 EOF
