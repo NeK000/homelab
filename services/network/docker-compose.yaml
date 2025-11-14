@@ -11,5 +11,5 @@ services:
       - "${PORT_NETWORK_TSDPROXY}:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "/mnt/user/appdata/tower/tsdproxy:/data"
-      - "/mnt/user/appdata/tower/tsdproxy-config:/config"
+      - "${PATH_APPDATA_UNRAID}/tower/tsdproxy:/data"
+      - "${PATH_APPDATA_UNRAID}/tower/tsdproxy-config:/config"

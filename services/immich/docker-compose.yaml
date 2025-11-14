@@ -13,7 +13,7 @@ services:
     labels:
       "net.unraid.docker.managed": "dockerman"
     volumes:
-      - "${appdata_path}/PostgreSQL_Immich:/var/lib/postgresql/data:rw"
+      - "${PATH_APPDATA_UNRAID}/PostgreSQL_Immich:/var/lib/postgresql/data:rw"
     ports:
       - "${IMMICH_DB_PORT}:5432"
     healthcheck:
@@ -73,9 +73,9 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - "${appdata_path}/immich/photos:/photos:rw"
-      - "${appdata_path}/immich/libs:/libraries:rw"
-      - "${appdata_path}/immich:/config:rw"
+      - "${PATH_APPDATA_UNRAID}/immich/photos:/photos:rw"
+      - "${PATH_APPDATA_UNRAID}/immich/libs:/libraries:rw"
+      - "${PATH_APPDATA_UNRAID}/immich:/config:rw"
     deploy:
       resources:
         reservations:

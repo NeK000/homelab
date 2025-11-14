@@ -19,7 +19,7 @@ services:
     ports:
       - "8081:8080"
     volumes:
-      - "${appdata_path}/ollama-webui:/app/backend/data"
+      - "${PATH_APPDATA_UNRAID}/ollama-webui:/app/backend/data"
 
   llama-ollama:
     image: "ollama/ollama:0.12.9"
@@ -41,7 +41,7 @@ services:
       net.unraid.docker.webui: "http://[IP]:[PORT:11434]/"
       net.unraid.docker.icon: "https://ollama.ai/public/ollama.png"
     volumes:
-      - "${appdata_path}/ollama:/root/.ollama:rw"
+      - "${PATH_APPDATA_UNRAID}/ollama:/root/.ollama:rw"
     deploy:
       resources:
         reservations:

@@ -20,7 +20,7 @@ services:
       - net.unraid.docker.managed=dockerman
       - net.unraid.docker.icon=https://raw.githubusercontent.com/IDmedia/hass-unraid/main/extras/logo.png
     volumes:
-      - "/mnt/user/appdata/hass-unraid:/data:rw"
+      - "${PATH_APPDATA_UNRAID}/hass-unraid:/data:rw"
   duplicati:
     container_name: duplicati
     image: duplicati/duplicati:2.1.1.101
@@ -35,8 +35,8 @@ services:
       SETTINGS_ENCRYPTION_KEY: "${DUPLICATI_SETTINGS_ENCRYPTION_KEY}"
       DUPLICATI__WEBSERVICE_PASSWORD: "${DUPLICATI__WEBSERVICE_PASSWORD}"
     volumes:
-      - /mnt/user/appdata/duplicati-config:/data
-      - /mnt/user/appdata:/mnt
+      - "${PATH_APPDATA_UNRAID}/duplicati-config:/data"
+      - "${PATH_APPDATA_UNRAID}:/mnt"
     ports:
       - "8200:8200"
   dozzle:
