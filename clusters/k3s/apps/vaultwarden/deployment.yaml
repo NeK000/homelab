@@ -31,8 +31,6 @@ spec:
                 secretKeyRef:
                   name: secrets
                   key: VAULTWARDEN_ADMIN_TOKEN
-            - name: DATABASE_URL
-              value: "postgresql://$(DB_USER):$(DB_PASSWORD)@${DB_HOST}:5432/${DB_NAME}"
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
@@ -53,6 +51,8 @@ spec:
                 secretKeyRef:
                   name: secrets
                   key: PG_DB_VAULTWARDEN
+            - name: DATABASE_URL
+              value: "postgresql://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):5432/$(DB_NAME)"
           volumeMounts:
             - name: vaultwarden-data
               mountPath: /data
