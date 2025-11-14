@@ -5,5 +5,5 @@ resources:
   - metallb
   - traefik
   - tailscale
-  - secret
+  - reflector
 #  - cloudnative-pg
