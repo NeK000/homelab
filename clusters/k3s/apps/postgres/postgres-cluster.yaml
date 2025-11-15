@@ -7,7 +7,6 @@ spec:
   instances: 3
   primaryUpdateStrategy: unsupervised
 
-  # Reference your custom password secret
   bootstrap:
     initdb:
       database: postgres
@@ -15,12 +14,10 @@ spec:
       secret:
         name: postgres-superuser
 
-  # Storage configuration - using local-path for database performance
   storage:
     storageClass: local-path
     size: 20Gi
 
-  # PostgreSQL configuration
   postgresql:
     parameters:
       max_connections: "300"
@@ -36,32 +33,12 @@ spec:
       min_wal_size: "1GB"
       max_wal_size: "4GB"
 
-  # High availability configuration
-  replica:
-    minSyncReplicas: 1
-    maxSyncReplicas: 2
+  minSyncReplicas: 1
+  maxSyncReplicas: 2
 
-  # Monitoring
   monitoring:
-    enabled: true
-    podMonitorEnabled: true
+    enablePodMonitor: true
 
-  # Backup configuration to NFS using your storage class
-  backup:
-    retentionPolicy: "30d"
-    barmanObjectStore:
-      destinationPath: "file:///backup"
-      serverName: "shared-postgres"
-      wal:
-        compression: gzip
-        maxParallel: 2
-      data:
-        compression: gzip
-        jobs: 2
-    volumeSnapshot:
-      className: ""
-
-  # Resources
   resources:
     requests:
       memory: "512Mi"
@@ -70,7 +47,6 @@ spec:
       memory: "2Gi"
       cpu: "1000m"
 
-  # Node affinity - prefer 8GB nodes
   affinity:
     nodeAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
@@ -81,14 +57,3 @@ spec:
                 operator: In
                 values:
                   - "8gb"
-
-  # Additional volumes for backups
-  additionalVolumes:
-    - name: backup-volume
-      persistentVolumeClaim:
-        claimName: postgres-backup-pvc
-
-  # Mount backup volume
-  additionalVolumeMounts:
-    - name: backup-volume
-      mountPath: /backup
