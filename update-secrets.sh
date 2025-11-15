@@ -38,7 +38,7 @@ metadata:
   annotations:
     reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
     reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
-    reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "mealie,karakeep,actual,homepage,postgres,vaultwarden"
+    reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "mealie,karakeep,actual,homepage,postgres,vaultwarden,tailscale"
 type: Opaque
 stringData:
 EOF
@@ -54,7 +54,7 @@ done < my.env
 # Seal it
 echo "🔒 Sealing secret..."
 mkdir -p clusters/k3s/apps/shared-secrets
-kubeseal --format=yaml --cert=/tmp/pub-cert.pem < /tmp/secret.yaml > clusters/k3s/apps/shared-secrets/sealed-secret.yaml
+kubeseal --format=yaml --cert=/tmp/pub-cert.pem < /tmp/secret.yaml > clusters/k3s/infrastructure/shared-secrets/sealed-secret.yaml
 
 rm /tmp/secret.yaml /tmp/pub-cert.pem
 

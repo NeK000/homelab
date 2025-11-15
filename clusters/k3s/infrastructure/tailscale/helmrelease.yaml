@@ -23,10 +23,10 @@ spec:
         namespace: flux-system
   valuesFrom:
     - kind: Secret
-      name: tailscale-operator-oauth
+      name: secrets
       valuesKey: TAILSCALE_CLIENT_ID
       targetPath: oauth.clientId
     - kind: Secret
-      name: tailscale-operator-oauth
+      name: secrets
       valuesKey: TAILSCALE_CLIENT_SECRET
       targetPath: oauth.clientSecret

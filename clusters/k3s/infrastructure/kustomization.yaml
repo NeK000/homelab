@@ -4,7 +4,8 @@ resources:
   - storage
   - metallb
   - metallb-config
+  - reflector
+  - shared-secrets
   - traefik
   - tailscale
-  - reflector
 #  - cloudnative-pg
