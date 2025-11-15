@@ -73,7 +73,7 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
-  ingressClassName: traefik
+  ingressClassName: traefik-traefik
   rules:
     - host: pgadmin.local
       http:
