@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - storage
   - metallb
+  - metallb-config
   - traefik
   - tailscale
   - reflector
