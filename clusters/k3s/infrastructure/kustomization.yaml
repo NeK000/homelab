@@ -10,4 +10,4 @@ resources:
   - shared-secrets
   - traefik
   - tailscale
-#  - cloudnative-pg
+  - cloudnative-pg
