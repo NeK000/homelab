@@ -48,7 +48,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: nfs-client
+  storageClassName: nfs-nvme-client
   resources:
     requests:
       storage: 2Gi
