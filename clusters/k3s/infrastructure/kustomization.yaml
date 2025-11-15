@@ -5,6 +5,7 @@ resources:
   - metallb
   - metallb-config
   - reflector
+  - sealed-secrets
   - shared-secrets
   - traefik
   - tailscale
