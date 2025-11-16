@@ -8,6 +8,9 @@ spec:
   imageName: ghcr.io/cloudnative-pg/postgresql:17.6
   primaryUpdateStrategy: unsupervised
 
+  superuserSecret:
+    name: postgres-superuser
+
   bootstrap:
     initdb:
       database: postgres

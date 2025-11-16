@@ -41,12 +41,6 @@ spec:
                 secretKeyRef:
                   name: secrets
                   key: PG_SHARED_INTERNAL_HOST
-            - name: GF_SECURITY_ADMIN_USER
-              value: "admin"
-            - name: GF_SECURITY_ADMIN_PASSWORD
-              value: "admin"
-            - name: GF_AUTH_ANONYMOUS_ENABLED
-              value: "false"
           volumeMounts:
             - name: grafana-data
               mountPath: /var/lib/grafana
