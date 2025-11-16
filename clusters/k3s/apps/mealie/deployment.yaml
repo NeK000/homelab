@@ -27,12 +27,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: secrets
-                  key: PG_USER
+                  key: PG_SHARED_USER
             - name: POSTGRES_SERVER
               valueFrom:
                 secretKeyRef:
                   name: secrets
-                  key: PG_HOST
+                  key: PG_SHARED_INTERNAL_HOST
             - name: POSTGRES_PORT
               value: "5432"
             - name: POSTGRES_DB
