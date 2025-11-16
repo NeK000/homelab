@@ -6,7 +6,9 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: shared-postgres
+    cnpg.io/cluster: shared-postgres
+    cnpg.io/instanceRole: primary  # Connect to primary for read-write
   ports:
     - port: 5432
       targetPort: 5432
+      protocol: TCP

@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: teslamate
+  namespace: teslamate
+spec:
+  defaultBackend:
+    service:
+      name: teslamate
+      port:
+        number: 4000
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - teslamate
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: teslamate-grafana
+  namespace: teslamate
+spec:
+  defaultBackend:
+    service:
+      name: grafana
+      port:
+        number: 3000
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - teslamate-grafana
