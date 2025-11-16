@@ -25,7 +25,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: secrets
-                  key: PG_USER
+                  key: PG_SHARED_USER
             - name: DATABASE_PASS
               valueFrom:
                 secretKeyRef:
