@@ -27,10 +27,7 @@ spec:
             - name: PGID
               value: "1000"
             - name: HOMEPAGE_ALLOWED_HOSTS
-              valueFrom:
-                secretKeyRef:
-                  name: secrets
-                  key: TAILSCALE_HOMEPAGE_URL
+              value: "kitchen-dash.local"
           volumeMounts:
             - name: kitchen-dash-config
               mountPath: /app/config
