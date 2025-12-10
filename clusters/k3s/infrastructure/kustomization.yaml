@@ -4,10 +4,10 @@ resources:
   - nfs-csi
   - storage
   - metallb
-#  - metallb-config
+  - metallb-config
   - reflector
   - sealed-secrets
-#  - shared-secrets
+  - shared-secrets
   - traefik
   - tailscale
   - cloudnative-pg
