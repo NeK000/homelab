@@ -53,10 +53,10 @@ done < my.env
 
 # Seal it
 echo "🔒 Sealing secret..."
-mkdir -p clusters/k3s/infrastructure/shared-secrets
-kubeseal --format=yaml --cert=/tmp/pub-cert.pem < /tmp/secret.yaml > clusters/k3s/infrastructure/shared-secrets/sealed-secret.yaml
+mkdir -p clusters/k3s/infrastructure/configs/shared-secrets
+kubeseal --format=yaml --cert=/tmp/pub-cert.pem < /tmp/secret.yaml > clusters/k3s/infrastructure/configs/shared-secrets/sealed-secret.yaml
 
 rm /tmp/secret.yaml /tmp/pub-cert.pem
 
-echo "✅ Sealed secret created at: clusters/k3s/infrastructure/shared-secrets/sealed-secret.yaml"
+echo "✅ Sealed secret created at: clusters/k3s/infrastructure/configs/shared-secrets/sealed-secret.yaml"
 echo "📤 Don't forget to commit and push to trigger Flux!"
