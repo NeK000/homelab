@@ -77,7 +77,7 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
-  ingressClassName: traefik-traefik
+  ingressClassName: traefik
   rules:
     - host: mealie.local
       http:
