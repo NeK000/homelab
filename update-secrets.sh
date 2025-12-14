@@ -49,7 +49,7 @@ while IFS='=' read -r key value; do
     value=$(echo "$value" | xargs)
     echo "  $key: \"$value\"" >> /tmp/secret.yaml
   fi
-done < my.env
+done < ../my.env
 
 # Seal it
 echo "🔒 Sealing secret..."
