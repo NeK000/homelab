@@ -24,7 +24,7 @@ services:
     restart: unless-stopped
 
   immich-redis:
-    image: "redis:8.2.2"
+    image: "redis:8.4.0"
     container_name: "Immich-Redis"
     environment:
       - "TZ=Europe/Paris"
