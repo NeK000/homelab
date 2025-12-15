@@ -25,7 +25,7 @@ services:
   duplicati:
     container_name: duplicati
     restart: unless-stopped
-    image: duplicati/duplicati:2.1.1.101
+    image: duplicati/duplicati:2.2.0.102
     labels:
       tsdproxy.enable: "true"
       tsdproxy.name: "duplicati"
