@@ -21,6 +21,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    restart: unless-stopped
 
   immich-redis:
     image: "redis:8.2.2"
@@ -30,6 +31,8 @@ services:
       - "HOST_OS=Unraid"
       - "HOST_HOSTNAME=Tower"
       - "HOST_CONTAINERNAME=Immich-Redis"
+    labels:
+      "net.unraid.docker.icon": "https://raw.githubusercontent.com/A75G/docker-templates/master/templates/icons/redis.png"
     ports:
       - "6379:6379"
     healthcheck:
@@ -37,6 +40,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    restart: unless-stopped
 
   immich:
     image: "ghcr.io/imagegenius/immich:2.3.1"
@@ -54,7 +58,6 @@ services:
       - "DB_DATABASE_NAME=immich"
       - "REDIS_HOSTNAME=${IMMICH_ADDRESS}"
       - "REDIS_PORT=6379"
-      - "REDIS_PASSWORD=''"
       - "MACHINE_LEARNING_HOST=0.0.0.0"
       - "MACHINE_LEARNING_PORT=3003"
       - "MACHINE_LEARNING_WORKERS=1"
@@ -89,3 +92,4 @@ services:
         condition: service_healthy
       immich-redis:
         condition: service_healthy
+    restart: unless-stopped

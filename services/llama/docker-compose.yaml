@@ -2,6 +2,7 @@ services:
   llama-open-webui:
     image: "ghcr.io/open-webui/open-webui:0.6.34"
     container_name: "open-webui"
+    restart: unless-stopped
     environment:
       TZ: "Europe/Paris"
       HOST_OS: "Unraid"
@@ -24,6 +25,7 @@ services:
   llama-ollama:
     image: "ollama/ollama:0.12.9"
     container_name: "ollama"
+    restart: unless-stopped
     ports:
       - "11434:11434"
     environment:

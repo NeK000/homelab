@@ -5,6 +5,7 @@ services:
   hass-unraid:
     image: ghcr.io/idmedia/hass-unraid:latest
     container_name: hass-unraid
+    restart: unless-stopped
     network_mode: bridge
     pid: host
     deploy:
@@ -23,6 +24,7 @@ services:
       - "${PATH_APPDATA_UNRAID}/hass-unraid:/data:rw"
   duplicati:
     container_name: duplicati
+    restart: unless-stopped
     image: duplicati/duplicati:2.1.1.101
     labels:
       tsdproxy.enable: "true"
@@ -42,6 +44,7 @@ services:
   dozzle:
     image: amir20/dozzle:latest
     container_name: dozzle
+    restart: unless-stopped
     labels:
       tsdproxy.enable: "true"
       tsdproxy.name: "dozzle"
@@ -54,4 +57,3 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - "38080:8080"
-    restart: unless-stopped
