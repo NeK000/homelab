@@ -4,12 +4,12 @@ set -e
 echo "🔐 Creating Sealed Secret from .env"
 
 # Check if .env exists
-if [ ! -f my.env ]; then
+if [ ! -f ../my.env ]; then
   echo "❌ Error: my.env file not found"
   exit 1
 fi
 echo "Remove trailing spaces from my.env"
-sed -i 's/[[:space:]]*$//' my.env
+sed -i 's/[[:space:]]*$//' ../my.env
 
 # Find the sealed-secrets pod in the sealed-secrets namespace (using Helm-deployed controller)
 echo "🔍 Finding Sealed Secrets controller..."
