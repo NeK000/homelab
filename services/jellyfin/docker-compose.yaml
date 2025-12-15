@@ -1,0 +1,60 @@
+
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:10.11.4
+    container_name: jellyfin
+    restart: unless-stopped
+    entrypoint: /opt/unraid/tailscale
+    network_mode: bridge
+    pids_limit: 2048
+    labels:
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:8096]
+      net.unraid.docker.icon: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/jellyfin-logo.png
+      net.unraid.docker.tailscale.webui: https://[hostname][magicdns]
+      net.unraid.docker.tailscale.hostname: jellyfin
+    environment:
+      - TZ=Europe/Paris
+      - HOST_OS=Unraid
+      - HOST_HOSTNAME=Tower
+      - HOST_CONTAINERNAME=jellyfin
+      - JELLYFIN_PublishedServerUrl=http://10.10.1.20
+      - PUID=99
+      - PGID=100
+      - UMASK=022
+      - TAILSCALE_HOSTNAME=jellyfin
+      - TAILSCALE_ALLOW_LAN_ACCESS=false
+      - TAILSCALE_USE_SSH=false
+      - TAILSCALE_USERSPACE_NETWORKING=false
+      - TAILSCALE_SERVE_PORT=8096
+      - ORG_ENTRYPOINT=/init
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    ports:
+      - "8096:8096"
+      - "8920:8920"
+      - "7359:7359/udp"
+      - "1900:1900/udp"
+    volumes:
+      - /mnt/user/media/:/data:rw
+      - /mnt/user/appdata/jellyfin:/config:rw
+      - /usr/local/share/docker/tailscale_container_hook:/opt/unraid/tailscale:rw
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+      - /dev/dri:/dev/dri
+      - /dev/nvidia-caps:/dev/nvidia-caps
+      - /dev/nvidia0:/dev/nvidia0
+      - /dev/nvidiactl:/dev/nvidiactl
+      - /dev/nvidia-modeset:/dev/nvidia-modeset
+      - /dev/nvidia-uvm:/dev/nvidia-uvm
+      - /dev/nvidia-uvm-tools:/dev/nvidia-uvm-tools
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    runtime: nvidia
