@@ -42,7 +42,7 @@ services:
     ports:
       - "8200:8200"
   dozzle:
-    image: amir20/dozzle:v8.14
+    image: amir20/dozzle:v9.0
     container_name: dozzle
     restart: unless-stopped
     labels:
