@@ -23,7 +23,7 @@ services:
       - "${PATH_APPDATA_UNRAID}/ollama-webui:/app/backend/data"
 
   llama-ollama:
-    image: "ollama/ollama:0.13.3"
+    image: "ollama/ollama:0.14.3"
     container_name: "ollama"
     restart: unless-stopped
     ports:
