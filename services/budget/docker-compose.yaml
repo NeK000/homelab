@@ -7,6 +7,7 @@ services:
       tsdproxy.enable: "true"
       tsdproxy.name: "budget"
       tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "5006"
     environment:
       - TZ=Europe/Copenhagen
       - budget_PORT=5006
