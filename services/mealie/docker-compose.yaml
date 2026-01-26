@@ -21,6 +21,6 @@ services:
       - POSTGRES_DB=mealie
       - POSTGRES_PASSWORD=${PG_PASS}
     ports:
-      - "${PORT_NETWORK_MEALIE}:9000"
+      - "9000:9000"
     volumes:
       - "${PATH_APPDATA_UNRAID}/mealie:/app/data:rw"
