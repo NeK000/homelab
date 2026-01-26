@@ -1,0 +1,16 @@
+services:
+  budget:
+    image: actualbudget/actual-server:25.12.0
+    container_name: budget
+    restart: "always"
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.name: "budget"
+      tsdproxy.ephemeral: "true"
+    environment:
+      - TZ=Europe/Copenhagen
+      - budget_PORT=5006
+    ports:
+      - "5006:5006"
+    volumes:
+      - "${PATH_APPDATA_UNRAID}/budget:/data:rw"
