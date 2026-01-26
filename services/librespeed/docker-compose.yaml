@@ -1,0 +1,22 @@
+services:
+  librespeed:
+    image: lscr.io/linuxserver/librespeed:5.4.20240804
+    container_name: librespeed
+    restart: "always"
+    labels:
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:${PORT_NETWORK_LIBRESPEED}]"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/librespeed-logo.png"
+      tsdproxy.enable: "true"
+      tsdproxy.name: "librespeed"
+      tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "80"
+    environment:
+      - TZ=Europe/Copenhagen
+      - MODE=standalone
+      - PUID=1000
+      - PGID=1000
+    ports:
+      - "${PORT_NETWORK_LIBRESPEED}:80"
+    volumes:
+      - "${PATH_APPDATA_UNRAID}/librespeed:/config:rw"
