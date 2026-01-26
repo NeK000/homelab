@@ -1,0 +1,16 @@
+services:
+  stirlingpdf:
+    image: stirlingtools/stirling-pdf:2.1.3
+    container_name: stirlingpdf
+    restart: "always"
+    labels:
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8080]"
+      tsdproxy.enable: "true"
+      tsdproxy.name: "stirlingpdf"
+      tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "8080"
+    environment:
+      - TZ=Europe/Copenhagen
+    ports:
+      - "8080:8080"

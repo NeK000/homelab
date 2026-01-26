@@ -5,7 +5,7 @@ services:
     restart: "always"
     labels:
       net.unraid.docker.managed: "dockerman"
-      net.unraid.docker.webui: "http://[IP]:[PORT:${PORT_NETWORK_MEALIE}]"
+      net.unraid.docker.webui: "http://[IP]:[PORT:9000]"
       net.unraid.docker.icon: "https://raw.githubusercontent.com/mealie-recipes/mealie/main/frontend/public/android-chrome-512x512.png"
       tsdproxy.enable: "true"
       tsdproxy.name: "mealie"
