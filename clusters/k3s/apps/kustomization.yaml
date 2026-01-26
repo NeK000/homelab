@@ -4,7 +4,6 @@ resources:
   - postgres
   - vaultwarden
   - stirlingpdf
-  - mealie
   - karakeep
   - homepage
   - kitchen-dash

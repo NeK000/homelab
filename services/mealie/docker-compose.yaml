@@ -1,0 +1,26 @@
+services:
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:v3.4.0
+    container_name: mealie
+    restart: "always"
+    labels:
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:${PORT_NETWORK_MEALIE}]"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/mealie-recipes/mealie/main/frontend/public/android-chrome-512x512.png"
+      tsdproxy.enable: "true"
+      tsdproxy.name: "mealie"
+      tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "9000"
+    environment:
+      - TZ=Europe/Copenhagen
+      - ALLOW_SIGNUP=true
+      - DB_ENGINE=postgres
+      - POSTGRES_USER=${PG_SHARED_USER}
+      - POSTGRES_SERVER=${PG_SHARED_INTERNAL_HOST}
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=mealie
+      - POSTGRES_PASSWORD=${PG_PASS}
+    ports:
+      - "${PORT_NETWORK_MEALIE}:9000"
+    volumes:
+      - "${PATH_APPDATA_UNRAID}/mealie:/app/data:rw"
