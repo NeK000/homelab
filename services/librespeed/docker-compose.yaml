@@ -1,6 +1,6 @@
 services:
   librespeed:
-    image: lscr.io/linuxserver/librespeed:5.4.20240804
+    image: lscr.io/linuxserver/librespeed:5.5.1
     container_name: librespeed
     restart: "always"
     labels:
