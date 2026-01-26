@@ -1,0 +1,21 @@
+services:
+  nginx-proxy-manager:
+    image: jc21/nginx-proxy-manager:2.11.3
+    container_name: nginx-proxy-manager
+    restart: "always"
+    labels:
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:81]"
+      tsdproxy.enable: "true"
+      tsdproxy.name: "nginx-proxy-manager"
+      tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "81"
+    environment:
+      - TZ=Europe/Copenhagen
+    ports:
+      - "80:80"
+      - "443:443"
+      - "81:81"
+    volumes:
+      - "${PATH_APPDATA_UNRAID}/nginx-proxy-manager/data:/data:rw"
+      - "${PATH_APPDATA_UNRAID}/nginx-proxy-manager/letsencrypt:/etc/letsencrypt:rw"
