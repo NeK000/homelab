@@ -64,6 +64,7 @@ services:
     labels:
       net.unraid.docker.managed: dockerman
       net.unraid.docker.webui: http://[IP]:[PORT:3004]
+      net.unraid.docker.icon: https://raw.githubusercontent.com/gethomepage/homepage/main/public/android-chrome-512x512.png
     environment:
       - PUID=1000
       - PGID=1000
@@ -83,6 +84,7 @@ services:
       tsdproxy.container_port: "3005"
       net.unraid.docker.managed: dockerman
       net.unraid.docker.webui: http://[IP]:[PORT:3005]
+      net.unraid.docker.icon: https://raw.githubusercontent.com/gethomepage/homepage/main/public/android-chrome-512x512.png
     environment:
       - PUID=1000
       - PGID=1000
