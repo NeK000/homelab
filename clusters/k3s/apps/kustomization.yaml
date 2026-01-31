@@ -3,5 +3,4 @@ kind: Kustomization
 resources:
   - postgres
   - vaultwarden
-  - karakeep
   - n8n
