@@ -57,3 +57,18 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - "38080:8080"
+  kitchen-dash:
+    image: ghcr.io/gethomepage/homepage:v1.8.0
+    container_name: kitchen-dash
+    restart: unless-stopped
+    labels:
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:3004]
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - HOMEPAGE_ALLOWED_HOSTS=kitchen-dash.local
+    volumes:
+      - "${PATH_APPDATA_UNRAID}/kitchen-dash:/app/config:rw"
+    ports:
+      - "3004:3000"

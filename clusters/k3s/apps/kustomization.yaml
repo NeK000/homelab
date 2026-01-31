@@ -3,8 +3,6 @@ kind: Kustomization
 resources:
   - postgres
   - vaultwarden
-  - stirlingpdf
   - karakeep
   - homepage
-  - kitchen-dash
   - n8n
