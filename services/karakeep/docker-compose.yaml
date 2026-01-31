@@ -3,6 +3,8 @@ services:
     image: gcr.io/zenika-hub/alpine-chrome:123
     container_name: karakeep-chrome
     restart: unless-stopped
+    labels:
+      net.unraid.docker.icon: https://raw.githubusercontent.com/Collectathon/unraid-templates/main/icons/hoarder.png
     command:
       - --no-sandbox
       - --disable-gpu
@@ -14,6 +16,8 @@ services:
     image: getmeili/meilisearch:v1.13.3
     container_name: karakeep-meilisearch
     restart: unless-stopped
+    labels:
+      net.unraid.docker.icon: https://raw.githubusercontent.com/Collectathon/unraid-templates/main/icons/hoarder.png
     environment:
       - MEILI_NO_ANALYTICS=true
       - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
@@ -30,6 +34,7 @@ services:
       tsdproxy.container_port: "3006"
       net.unraid.docker.managed: dockerman
       net.unraid.docker.webui: http://[IP]:[PORT:3006]
+      net.unraid.docker.icon: https://raw.githubusercontent.com/Collectathon/unraid-templates/main/icons/hoarder.png
     environment:
       - MEILI_ADDR=http://karakeep-meilisearch:7700
       - BROWSER_WEB_URL=http://karakeep-chrome:9222
