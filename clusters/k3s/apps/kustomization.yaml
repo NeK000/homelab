@@ -4,5 +4,4 @@ resources:
   - postgres
   - vaultwarden
   - karakeep
-  - homepage
   - n8n
