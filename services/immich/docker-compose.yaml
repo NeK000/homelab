@@ -76,7 +76,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - "${PATH_APPDATA_UNRAID}/immich/photos:/photos:rw"
+      - "/mnt/user/immich_photos:/photos:rw"
       - "${PATH_APPDATA_UNRAID}/immich/libs:/libraries:rw"
       - "${PATH_APPDATA_UNRAID}/immich:/config:rw"
     deploy:
