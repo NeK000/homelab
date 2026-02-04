@@ -43,7 +43,7 @@ services:
     restart: unless-stopped
 
   immich:
-    image: "ghcr.io/imagegenius/immich:2.3.1"
+    image: "ghcr.io/imagegenius/immich:2.5.3"
     container_name: "Immich_Application"
     environment:
       - "NVIDIA_VISIBLE_DEVICES=all"
