@@ -1,14 +1,40 @@
 services:
   broker:
     image: docker.io/library/redis:8
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/juusujanar/unraid-templates/master/img/Redis-logo.png"
     restart: unless-stopped
     volumes:
       - "${PATH_APPDATA_UNRAID}/paperless/redis-data:/data"
+  gotenberg:
+    image: docker.io/gotenberg/gotenberg:8.25
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/sgraaf/Unraid-Docker-Templates/main/gotenberg/icon.png"
+    restart: unless-stopped
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+  tika:
+    image: docker.io/apache/tika:latest
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/Skylinar/unraid_templates/refs/heads/main/images/tika.png?raw=true"
+    restart: unless-stopped
   webserver:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
     restart: unless-stopped
+    labels:
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8000]"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/paperless.png"
+      tsdproxy.enable: "true"
+      tsdproxy.name: "mealie"
+      tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "8000"
     depends_on:
       - broker
+      - gotenberg
+      - tika
     ports:
       - "8000:8000"
     volumes:
@@ -29,13 +55,3 @@ services:
       PAPERLESS_TIKA_ENABLED: 1
       PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
-  gotenberg:
-    image: docker.io/gotenberg/gotenberg:8.25
-    restart: unless-stopped
-    command:
-      - "gotenberg"
-      - "--chromium-disable-javascript=true"
-      - "--chromium-allow-list=file:///tmp/.*"
-  tika:
-    image: docker.io/apache/tika:latest
-    restart: unless-stopped
