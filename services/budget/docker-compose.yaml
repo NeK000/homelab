@@ -1,6 +1,6 @@
 services:
   budget:
-    image: actualbudget/actual-server:25.12.0
+    image: actualbudget/actual-server:26.2.0
     container_name: budget
     restart: "always"
     labels:
