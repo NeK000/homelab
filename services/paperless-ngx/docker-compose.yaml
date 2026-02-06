@@ -78,8 +78,8 @@ services:
       LOG_LEVEL: "info" # Optional: debug, warn, error
     volumes:
       - "${PATH_APPDATA_UNRAID}/paperless/gpt/prompts:/app/prompts"
-      - "${PATH_APPDATA_UNRAID}/paperless/gpt/hocr:/app/hocr
-      - "${PATH_APPDATA_UNRAID}/paperless/gpt/pdf:/app/pdf
+      - "${PATH_APPDATA_UNRAID}/paperless/gpt/hocr:/app/hocr"
+      - "${PATH_APPDATA_UNRAID}/paperless/gpt/pdf:/app/pdf"
     ports:
       - "8080:8080"
     depends_on:
