@@ -81,6 +81,6 @@ services:
       - "${PATH_APPDATA_UNRAID}/paperless/gpt/hocr:/app/hocr"
       - "${PATH_APPDATA_UNRAID}/paperless/gpt/pdf:/app/pdf"
     ports:
-      - "8080:8080"
+      - "33380:8080"
     depends_on:
       - paperless-ngx      
