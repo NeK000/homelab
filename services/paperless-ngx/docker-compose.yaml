@@ -20,7 +20,7 @@ services:
     labels:
       net.unraid.docker.icon: "https://raw.githubusercontent.com/Skylinar/unraid_templates/refs/heads/main/images/tika.png?raw=true"
     restart: unless-stopped
-  webserver:
+  paperless-ngx:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
     restart: unless-stopped
     labels:
