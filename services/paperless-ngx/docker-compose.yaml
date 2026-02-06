@@ -60,7 +60,7 @@ services:
     labels:
       net.unraid.docker.icon: "https://raw.githubusercontent.com/Skylinar/unraid_templates/refs/heads/main/images/tika.png?raw=true"
     environment:
-      PAPERLESS_BASE_URL: "http://webserver:8000"
+      PAPERLESS_BASE_URL: "http://paperless-ngx:8000"
       PAPERLESS_API_TOKEN: "${PAPERLESS_API_TOKEN}"
       MANUAL_TAG: "paperless-gpt" # Optional, default: paperless-gpt
       AUTO_TAG: "paperless-gpt-auto" # Optional, default: paperless-gpt-auto
