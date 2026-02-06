@@ -1,0 +1,41 @@
+services:
+  broker:
+    image: docker.io/library/redis:8
+    restart: unless-stopped
+    volumes:
+      - "${PATH_APPDATA_UNRAID}/paperless/redis-data:/data"
+  webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    restart: unless-stopped
+    depends_on:
+      - broker
+    ports:
+      - "8000:8000"
+    volumes:
+      - "${PATH_APPDATA_UNRAID}/paperless/data:/usr/src/paperless/data"
+      - "/mnt/user/paperless-data/media:/usr/src/paperless/media"
+      - "/mnt/user/paperless-data/export:/usr/src/paperless/export"
+      - "/mnt/user/paperless-data/consume:/usr/src/paperless/consume"
+    environment:
+      PAPERLESS_REDIS: redis://broker:6379
+      PAPERLESS_DBHOST: ${PG_SHARED_INTERNAL_HOST}
+      PAPERLESS_DBPORT: 5432
+      PAPERLESS_DBNAME: paperless
+      PAPERLESS_DBUSER: ${PG_SHARED_USER}
+      PAPERLESS_DBPASS: ${PG_PASS}
+      PAPERLESS_TIME_ZONE: "Europe/Copenhagen"
+      PAPERLESS_OCR_LANGUAGE: dan
+      PAPERLESS_OCR_LANGUAGES: bul dan
+      PAPERLESS_TIKA_ENABLED: 1
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
+      PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+  gotenberg:
+    image: docker.io/gotenberg/gotenberg:8.25
+    restart: unless-stopped
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+  tika:
+    image: docker.io/apache/tika:latest
+    restart: unless-stopped
