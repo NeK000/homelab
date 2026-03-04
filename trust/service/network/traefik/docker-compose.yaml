@@ -4,7 +4,7 @@ configs:
 
 services:
   traefik:
-    image: traefik:v3.4.1
+    image: traefik:v3.6.9
     ports:
       - "80:80"
     configs:
@@ -12,11 +12,13 @@ services:
         target: /etc/traefik/traefik.yml
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${REPO_ROOT}/shared/rendered/traefik:/etc/traefik/dynamic:ro
       - traefik_logs:/var/log/traefik
     networks:
       - traefik-public
       - monitoring
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik-public
     deploy:
       mode: replicated
       replicas: 1
@@ -25,14 +27,18 @@ services:
           - node.role == manager
       restart_policy:
         condition: on-failure
-      labels:
-        - traefik.enable=true
-        - traefik.docker.network=traefik-public
-        - traefik.http.routers.traefik-dashboard.rule=Host(`${TRAEFIK_OWN_DOMAIN}`)
-        - traefik.http.routers.traefik-dashboard.entrypoints=web
-        - traefik.http.routers.traefik-dashboard.service=api@internal
-        - traefik.http.routers.traefik-dashboard.middlewares=dashboard-chain@file
-        - traefik.http.services.traefik-dashboard.loadbalancer.server.port=8080
+
+  whoami:
+    image: traefik/whoami:v1.11
+    networks:
+      - traefik-public
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik-public
+      - traefik.http.routers.whoami.rule=Host(`${TRAEFIK_OWN_DOMAIN}`) && PathPrefix(`/whoami`)
+      - traefik.http.routers.whoami.entrypoints=web
+      - traefik.http.routers.whoami.priority=100
+      - traefik.http.services.whoami.loadbalancer.server.port=80
 networks:
   traefik-public:
     external: true
