@@ -28,7 +28,7 @@ services:
       labels:
         - traefik.enable=true
         - traefik.docker.network=traefik-public
-        - traefik.http.routers.traefik-dashboard.rule=Host(`${TRAEFIK_DOMAIN}`)
+        - traefik.http.routers.traefik-dashboard.rule=Host(`${TRAEFIK_OWN_DOMAIN}`)
         - traefik.http.routers.traefik-dashboard.entrypoints=web
         - traefik.http.routers.traefik-dashboard.service=api@internal
         - traefik.http.routers.traefik-dashboard.middlewares=dashboard-chain@file
