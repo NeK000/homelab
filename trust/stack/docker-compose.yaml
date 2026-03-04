@@ -1,0 +1,4 @@
+name: trust
+
+include:
+  - ../service/network/traefik/docker-compose.yaml

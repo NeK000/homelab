@@ -1,0 +1,45 @@
+configs:
+  traefik_static:
+    file: traefik.yml
+
+services:
+  traefik:
+    image: traefik:v3.4.1
+    ports:
+      - "80:80"
+    configs:
+      - source: traefik_static
+        target: /etc/traefik/traefik.yml
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${REPO_ROOT}/shared/rendered/traefik:/etc/traefik/dynamic:ro
+      - traefik_logs:/var/log/traefik
+    networks:
+      - traefik-public
+      - monitoring
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik-public
+        - traefik.http.routers.traefik-dashboard.rule=Host(`${TRAEFIK_DOMAIN}`)
+        - traefik.http.routers.traefik-dashboard.entrypoints=web
+        - traefik.http.routers.traefik-dashboard.service=api@internal
+        - traefik.http.routers.traefik-dashboard.middlewares=dashboard-chain@file
+        - traefik.http.services.traefik-dashboard.loadbalancer.server.port=8080
+networks:
+  traefik-public:
+    external: true
+    name: traefik-public
+  monitoring:
+    external: true
+    name: monitoring
+
+volumes:
+  traefik_logs:
