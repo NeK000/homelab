@@ -1,0 +1,83 @@
+services:
+  teslamate-teslamate:
+    image: "teslamate/teslamate:2.2.0"
+    networks:
+      - traefik-public
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.name: "teslamate"
+      tsdproxy.ephemeral: "true"
+    ports:
+      - "${PORT_TESLAMATE_TESLAMATE}:${PORT_TESLAMATE_TESLAMATE}"
+    environment:
+      ENCRYPTION_KEY: "${TESLAMATE_ENCRYPTION_KEY}"
+      DATABASE_USER: "${PG_USER}"
+      DATABASE_PASS: "${PG_PASS}"
+      DATABASE_NAME: "${PG_DB_TESLAMATE}"
+      DATABASE_HOST: "${PG_HOST}"
+      MQTT_HOST: "${MQTT_HOST}"
+      MQTT_USERNAME: "${MQTT_USERNAME}"
+      MQTT_PASSWORD: "${MQTT_PASSWORD}"
+      PORT: "${PORT_TESLAMATE_TESLAMATE}"
+    cap_drop:
+      - "all"
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  teslamate-grafana:
+    image: "teslamate/grafana:2.2.0"
+    networks:
+      - traefik-public
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.name: "teslamate-grafana"
+      tsdproxy.ephemeral: "true"
+    ports:
+      - "${PORT_TESLAMATE_GRAFANA}:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    environment:
+      DATABASE_USER: "${PG_USER}"
+      DATABASE_PASS: "${PG_PASS}"
+      DATABASE_NAME: "${PG_DB_TESLAMATE}"
+      DATABASE_HOST: "${PG_HOST}"
+      GF_SECURITY_ADMIN_USER: "${TESLAMATE_GRAFANA_USER}"
+      GF_SECURITY_ADMIN_PASSWORD: "${TESLAMATE_GRAFANA_PASSWORD}"
+      PUID: "472"
+      PGID: "472"
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  teslamate-abrp:
+    image: "fetzu/teslamate-abrp:3.4.0"
+    networks:
+      - traefik-public
+    labels:
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/simonsickle/unraid-templates/main/teslamate/logo.png"
+    environment:
+      MQTT_SERVER: "${MQTT_HOST}"
+      MQTT_USERNAME: "${MQTT_USERNAME}"
+      MQTT_PASSWORD: "${MQTT_PASSWORD}"
+      USER_TOKEN: "${TESLAMATE_ABRP_KEY}"
+      CAR_NUMBER: "${TESLAMATE_ABRP_CAR_NUMBER}"
+      CAR_MODEL: "${TESLAMATE_ABRP_CAR_MODEL}"
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+networks:
+  traefik-public:
+    external: true
+    name: traefik-public
+
+volumes:
+  grafana-data:

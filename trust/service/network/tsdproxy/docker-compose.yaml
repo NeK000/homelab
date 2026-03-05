@@ -2,7 +2,7 @@ configs:
   tsdproxy_static:
     file: tsdproxy.yaml
   tsdproxy_authkey:
-    file: /run/secrets/ts_authkey
+    file: ../../../ts_authkey
 
 services:
   tsdproxy:
