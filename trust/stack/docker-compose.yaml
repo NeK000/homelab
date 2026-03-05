@@ -3,3 +3,4 @@ name: trust
 include:
   - ../service/network/traefik/docker-compose.yaml
   - ../service/network/tsdproxy/docker-compose.yaml
+  - ../service/teslamate/docker-compose.yaml
