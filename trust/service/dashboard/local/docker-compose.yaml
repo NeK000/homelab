@@ -23,3 +23,8 @@ services:
           - node.role == manager
       restart_policy:
         condition: on-failure
+
+networks:
+  traefik-public:
+    external: true
+    name: traefik-public
