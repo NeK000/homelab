@@ -18,7 +18,10 @@ services:
       traefik.http.routers.gatus.entrypoints: "web"
       traefik.http.services.gatus.loadbalancer.server.port: "8080"
     environment:
-      - GATUS_CONFIG_PATH=/config/config.yaml
+      GATUS_CONFIG_PATH: "/config/config.yaml"
+      PG_HOST: "${PG_HOST}"
+      PG_PASS: "${PG_PASS}"
+      PG_USER: "${PG_USER}"
     deploy:
       replicas: 1
       placement:
