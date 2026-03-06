@@ -10,7 +10,7 @@ endpoints:
 
   - name: PDF Service
     group: internal
-    url: http://pdf.local
+    url: http://pdf.local/login
     interval: 30s
     conditions:
       - "[STATUS] == 200"
@@ -22,7 +22,7 @@ endpoints:
       - "[STATUS] == 200"
   - name: Teslamate Grafana Service
     group: internal
-    url: http://teslamate-grafana.local
+    url: http://teslamate-grafana.local/login
     interval: 30s
     conditions:
       - "[STATUS] == 200"

@@ -42,7 +42,7 @@ services:
       traefik.enable: "true"
       traefik.http.routers.teslamategrafana.rule: "Host(`teslamate-grafana.local`)"
       traefik.http.routers.teslamategrafana.entrypoints: "web"
-      traefik.http.services.teslamategrafana.loadbalancer.server.port: "${PORT_TESLAMATE_GRAFANA}"
+      traefik.http.services.teslamategrafana.loadbalancer.server.port: "3000"
     ports:
       - "${PORT_TESLAMATE_GRAFANA}:3000"
     volumes:
