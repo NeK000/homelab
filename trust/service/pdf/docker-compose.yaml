@@ -1,0 +1,24 @@
+services:
+  stirlingpdf:
+    image: stirlingtools/stirling-pdf:2.7.0
+    environment:
+      TZ: Europe/Copenhagen
+    networks:
+      - traefik-public
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.name: "pdf"
+      tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "8080"
+      traefik.enable: "true"
+      traefik.http.routers.pdf.rule: "Host(`pdf.local`)"
+      traefik.http.routers.pdf.entrypoints: "web"
+      traefik.http.services.pdf.loadbalancer.server.port: "8080"
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+networks:
+  traefik-public:
+    external: true
+    name: traefik-public

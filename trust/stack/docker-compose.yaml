@@ -4,5 +4,6 @@ include:
   - ../service/network/traefik/docker-compose.yaml
   - ../service/network/tsdproxy/docker-compose.yaml
   - ../service/monitoring/docker-compose.yaml
+  - ../service/pdf/docker-compose.yaml
   - ../service/teslamate/docker-compose.yaml
   - ../service/dashboard/local/docker-compose.yaml

@@ -14,7 +14,7 @@
   },
   "services": [
     {
-      "name": "PDF Service",
+      "name": "PDF",
       "url": "http://pdf.local",
       "monitorPath": "/login",
       "homepageEnabled": false,

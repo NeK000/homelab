@@ -14,7 +14,7 @@ endpoints:
     interval: 30s
     conditions:
       - "[STATUS] == 200"
-  - name: PDF Service
+  - name: PDF
     group: internal
     url: http://pdf.local/login
     interval: 30s
