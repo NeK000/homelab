@@ -1,0 +1,28 @@
+storage:
+  type: postgres
+  path: postgres://gatus:password@postgres:5432/gatus?sslmode=disable
+
+ui:
+  title: Homelab Monitoring
+  description: Internal service health checks
+
+endpoints:
+
+  - name: PDF Service
+    group: internal
+    url: http://pdf.local
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+  - name: Teslamate Service
+    group: internal
+    url: http://teslamate.local
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+  - name: Teslamate Grafana Service
+    group: internal
+    url: http://teslamate-grafana.local
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"

@@ -1,0 +1,34 @@
+version: "3.9"
+configs:
+  gatus_config:
+    file: ./config/config.yaml
+
+services:
+  gatus:
+    image: twinproduction/gatus:latest
+    configs:
+      - source: gatus_config
+        target: /config/config.yaml
+    networks:
+      - traefik-public
+      - monitoring
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.gatus.rule: "Host(`gatus.local`)"
+      traefik.http.routers.gatus.entrypoints: "web"
+      traefik.http.services.gatus.loadbalancer.server.port: "8080"
+    environment:
+      - GATUS_CONFIG_PATH=/config/config.yaml
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+
+networks:
+  traefik-public:
+    external: true
+  monitoring:
+    external: true
