@@ -8,9 +8,9 @@ services:
       tsdproxy.name: "teslamate"
       tsdproxy.ephemeral: "true"
       traefik.enable: "true"
-      traefik.http.routers.gatus.rule: "Host(`teslamate.local`)"
-      traefik.http.routers.gatus.entrypoints: "web"
-      traefik.http.services.gatus.loadbalancer.server.port: "${PORT_TESLAMATE_TESLAMATE}"
+      traefik.http.routers.teslamate.rule: "Host(`teslamate.local`)"
+      traefik.http.routers.teslamate.entrypoints: "web"
+      traefik.http.services.teslamate.loadbalancer.server.port: "${PORT_TESLAMATE_TESLAMATE}"
     ports:
       - "${PORT_TESLAMATE_TESLAMATE}:${PORT_TESLAMATE_TESLAMATE}"
     environment:
@@ -40,9 +40,9 @@ services:
       tsdproxy.name: "teslamate-grafana"
       tsdproxy.ephemeral: "true"
       traefik.enable: "true"
-      traefik.http.routers.gatus.rule: "Host(`teslamate-grafana.local`)"
-      traefik.http.routers.gatus.entrypoints: "web"
-      traefik.http.services.gatus.loadbalancer.server.port: "${PORT_TESLAMATE_GRAFANA}"
+      traefik.http.routers.teslamategrafana.rule: "Host(`teslamate-grafana.local`)"
+      traefik.http.routers.teslamategrafana.entrypoints: "web"
+      traefik.http.services.teslamategrafana.loadbalancer.server.port: "${PORT_TESLAMATE_GRAFANA}"
     ports:
       - "${PORT_TESLAMATE_GRAFANA}:3000"
     volumes:
