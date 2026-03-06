@@ -22,6 +22,8 @@ services:
       - tsdproxy_state:/data
     command:
       - /config/tsdproxy.yaml
+    ports:
+      - "58080:8080"
     networks:
       - traefik-public
     deploy:
