@@ -38,4 +38,4 @@ volumes:
     driver_opts:
       type: "nfs"
       o: "addr=${NFS_HOST},rw,nfsvers=${MEALIE_NFS_VERS:-4}"
-      device: ":appdata-shared/mealie"
+      device: ":/appdata-shared/mealie"
