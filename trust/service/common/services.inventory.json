@@ -17,7 +17,7 @@
       "name": "PDF",
       "url": "http://pdf.local",
       "monitorPath": "/login",
-      "homepageEnabled": false,
+      "homepageGroup": "Internal",
       "monitorGroup": "internal"
     },
     {
@@ -59,7 +59,7 @@
     {
       "name": "Pi Hole",
       "url": "http://pihole.local",
-      "homepageGroup": "External",
+      "homepageGroup": "Infrastructure",
       "monitorEnabled": false
     }
   ]

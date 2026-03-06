@@ -3,20 +3,22 @@
 # Source of truth: trust/service/common/services.inventory.json
 
 - External:
-    - Pi Hole:
-        href: http://pihole.local
     - UniFi Admin:
         href: http://unifi.local
 
 - Infrastructure:
     - Gatus:
         href: http://gatus.local
+    - Pi Hole:
+        href: http://pihole.local
     - TSDProxy:
         href: http://tailscale.local
     - Tower:
         href: http://tower.local
 
 - Internal:
+    - PDF:
+        href: http://pdf.local
     - Teslamate:
         href: http://teslamate.local
     - Teslamate Grafana:
