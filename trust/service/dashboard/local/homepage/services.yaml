@@ -1,0 +1,21 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- Internal:
+    - Teslamate:
+        href: http://teslamate.local
+    - Teslamate Grafana:
+          href: http://teslamate-grafana.local
+
+- Infrastructure:
+    - Tower:
+        href: http://tower.local
+    - Gatus:
+        href: https://gatus.local
+
+- External:
+    - UniFi Admin:
+        href: http://unifi.local
+    - Pi Hole:
+        href: http://pihole.local
