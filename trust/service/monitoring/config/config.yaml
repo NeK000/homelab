@@ -26,3 +26,9 @@ endpoints:
     interval: 30s
     conditions:
       - "[STATUS] == 200"
+  - name: TSDProxy
+    group: internal
+    url: http://tailscale.local
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"

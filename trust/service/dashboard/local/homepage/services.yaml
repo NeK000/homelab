@@ -13,6 +13,9 @@
         href: http://tower.local
     - Gatus:
         href: http://gatus.local
+    - TSDProxy:
+        href: http://tailscale.local
+
 
 - External:
     - UniFi Admin:

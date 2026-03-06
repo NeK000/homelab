@@ -7,6 +7,11 @@ configs:
 services:
   tsdproxy:
     image: almeidapaulopt/tsdproxy:1.4.7
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.tailscale.rule: "Host(`tailscale.local`)"
+      traefik.http.routers.tailscale.entrypoints: "web"
+      traefik.http.services.tailscale.loadbalancer.server.port: "8080"
     configs:
       - source: tsdproxy_static
         target: /config/tsdproxy.yaml
