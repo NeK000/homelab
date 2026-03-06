@@ -20,6 +20,12 @@ endpoints:
     interval: 30s
     conditions:
       - "[STATUS] == 200"
+  - name: Recipes
+    group: internal
+    url: http://recipes.local
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
   - name: Teslamate Grafana Service
     group: internal
     url: http://teslamate-grafana.local/login

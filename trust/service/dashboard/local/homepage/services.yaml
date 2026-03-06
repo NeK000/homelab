@@ -19,6 +19,8 @@
 - Internal:
     - PDF:
         href: http://pdf.local
+    - Recipes:
+        href: http://recipes.local
     - Teslamate:
         href: http://teslamate.local
     - Teslamate Grafana:

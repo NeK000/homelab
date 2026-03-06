@@ -1,0 +1,41 @@
+services:
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:v3.11.0
+    environment:
+      TZ: Europe/Copenhagen
+      ALLOW_SIGNUP: "true"
+      DB_ENGINE: postgres
+      POSTGRES_USER: "${PG_USER}"
+      POSTGRES_SERVER: "${PG_HOST}"
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: mealie
+      POSTGRES_PASSWORD: "${PG_PASS}"
+    volumes:
+      - mealie_data:/app/data
+    networks:
+      - traefik-public
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.name: "recipes"
+      tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "9000"
+      traefik.enable: "true"
+      traefik.http.routers.recipes.rule: "Host(`recipes.local`)"
+      traefik.http.routers.recipes.entrypoints: "web"
+      traefik.http.services.recipes.loadbalancer.server.port: "9000"
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+networks:
+  traefik-public:
+    external: true
+    name: traefik-public
+
+volumes:
+  mealie_data:
+    driver: local
+    driver_opts:
+      type: "nfs"
+      o: "addr=${NFS_HOST},rw,nfsvers=${MEALIE_NFS_VERS:-4}"
+      device: ":appdata-shared/mealie"

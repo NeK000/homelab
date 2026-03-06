@@ -34,6 +34,12 @@
       "monitorPath": "/login"
     },
     {
+      "name": "Recipes",
+      "url": "http://recipes.local",
+      "homepageGroup": "Internal",
+      "monitorGroup": "internal"
+    },
+    {
       "name": "Tower",
       "url": "http://tower.local",
       "homepageGroup": "Infrastructure",
