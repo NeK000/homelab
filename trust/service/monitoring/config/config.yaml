@@ -8,15 +8,15 @@ ui:
 
 endpoints:
 
-  - name: PDF Service
-    group: internal
-    url: http://pdf.local/login
+  - name: TSDProxy
+    group: infrastructure
+    url: http://tailscale.local
     interval: 30s
     conditions:
       - "[STATUS] == 200"
-  - name: Teslamate Service
+  - name: PDF Service
     group: internal
-    url: http://teslamate.local
+    url: http://pdf.local/login
     interval: 30s
     conditions:
       - "[STATUS] == 200"
@@ -26,9 +26,9 @@ endpoints:
     interval: 30s
     conditions:
       - "[STATUS] == 200"
-  - name: TSDProxy
+  - name: Teslamate Service
     group: internal
-    url: http://tailscale.local
+    url: http://teslamate.local
     interval: 30s
     conditions:
       - "[STATUS] == 200"

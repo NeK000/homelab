@@ -1,0 +1,66 @@
+{
+  "gatus": {
+    "storagePath": "postgres://${PG_USER}:${PG_PASS}@${PG_HOST}:5432/gatus?sslmode=disable",
+    "ui": {
+      "title": "Homelab Monitoring",
+      "description": "Internal service health checks"
+    },
+    "defaults": {
+      "interval": "30s",
+      "conditions": [
+        "[STATUS] == 200"
+      ]
+    }
+  },
+  "services": [
+    {
+      "name": "PDF Service",
+      "url": "http://pdf.local",
+      "monitorPath": "/login",
+      "homepageEnabled": false,
+      "monitorGroup": "internal"
+    },
+    {
+      "name": "Teslamate",
+      "url": "http://teslamate.local",
+      "homepageGroup": "Internal",
+      "monitorName": "Teslamate Service"
+    },
+    {
+      "name": "Teslamate Grafana",
+      "url": "http://teslamate-grafana.local",
+      "homepageGroup": "Internal",
+      "monitorName": "Teslamate Grafana Service",
+      "monitorPath": "/login"
+    },
+    {
+      "name": "Tower",
+      "url": "http://tower.local",
+      "homepageGroup": "Infrastructure",
+      "monitorEnabled": false
+    },
+    {
+      "name": "Gatus",
+      "url": "http://gatus.local",
+      "homepageGroup": "Infrastructure",
+      "monitorEnabled": false
+    },
+    {
+      "name": "TSDProxy",
+      "url": "http://tailscale.local",
+      "homepageGroup": "Infrastructure"
+    },
+    {
+      "name": "UniFi Admin",
+      "url": "http://unifi.local",
+      "homepageGroup": "External",
+      "monitorEnabled": false
+    },
+    {
+      "name": "Pi Hole",
+      "url": "http://pihole.local",
+      "homepageGroup": "External",
+      "monitorEnabled": false
+    }
+  ]
+}
