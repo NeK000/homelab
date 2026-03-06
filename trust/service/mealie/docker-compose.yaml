@@ -11,7 +11,11 @@ services:
       POSTGRES_DB: mealie
       POSTGRES_PASSWORD: "${PG_PASS}"
     volumes:
-      - nfs/mealie:/app/data
+      - type: volume
+        source: mealie_data
+        target: /app/data
+        volume:
+          subpath: mealie
     networks:
       - traefik-public
     labels:
@@ -33,7 +37,7 @@ networks:
     name: traefik-public
 
 volumes:
-  nfs:
+  mealie_data:
     driver: local
     driver_opts:
       type: "nfs"
