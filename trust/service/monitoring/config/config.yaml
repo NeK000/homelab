@@ -20,6 +20,12 @@ endpoints:
     interval: 30s
     conditions:
       - "[STATUS] == 200"
+  - name: KaraKeep
+    group: internal
+    url: http://karakeep.local
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
   - name: Llama UI
     group: internal
     url: http://llama-ui.local

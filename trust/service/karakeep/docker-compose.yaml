@@ -11,6 +11,10 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
+    networks:
+      traefik-public:
+        aliases:
+          - karakeep-chrome
 
   karakeep-meilisearch:
     image: getmeili/meilisearch:v1.37.0
@@ -26,6 +30,10 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
+    networks:
+      traefik-public:
+        aliases:
+          - karakeep-meilisearch
 
   karakeep:
     image: ghcr.io/karakeep-app/karakeep:release
@@ -42,8 +50,9 @@ services:
         volume:
           subpath: karakeep
     networks:
-      - default
-      - traefik-public
+      traefik-public:
+        aliases:
+          - karakeep
     labels:
       tsdproxy.enable: "true"
       tsdproxy.name: "karakeep"
