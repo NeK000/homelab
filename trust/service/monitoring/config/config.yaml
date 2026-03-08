@@ -32,6 +32,12 @@ endpoints:
     interval: 30s
     conditions:
       - "[STATUS] == 200"
+  - name: Speedtest
+    group: internal
+    url: http://speedtest.local
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
   - name: Teslamate Grafana Service
     group: internal
     url: http://teslamate-grafana.local/login

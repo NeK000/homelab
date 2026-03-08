@@ -1,0 +1,37 @@
+services:
+  librespeed:
+    image: lscr.io/linuxserver/librespeed:5.5.1
+    environment:
+      TZ: Europe/Copenhagen
+      MODE: standalone
+      PUID: "1000"
+      PGID: "1000"
+    volumes:
+      - type: volume
+        source: nfs-share
+        target: /config
+        volume:
+          subpath: librespeed
+    networks:
+      - traefik-public
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.name: "speedtest"
+      tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "80"
+      traefik.enable: "true"
+      traefik.http.routers.speedtest.rule: "Host(`speedtest.local`) || Host(`speedtest`)"
+      traefik.http.routers.speedtest.entrypoints: "web"
+      traefik.http.services.speedtest.loadbalancer.server.port: "80"
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+networks:
+  traefik-public:
+    external: true
+    name: traefik-public
+
+volumes:
+  nfs-share:
+    external: true

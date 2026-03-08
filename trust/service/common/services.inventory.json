@@ -20,6 +20,12 @@
       "monitorGroup": "internal"
     },
     {
+      "name": "Speedtest",
+      "url": "http://speedtest.local",
+      "homepageGroup": "Internal",
+      "monitorGroup": "internal"
+    },
+    {
       "name": "PDF",
       "url": "http://pdf.local",
       "monitorPath": "/login",

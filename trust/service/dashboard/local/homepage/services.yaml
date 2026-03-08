@@ -16,7 +16,7 @@
     - Gatus:
         href: http://gatus.local
     - Pi Hole:
-        href: http://pihole.local
+        href: http://pihole.local/admin/
     - TSDProxy:
         href: http://tailscale.local
     - Tower:
@@ -29,6 +29,8 @@
         href: http://pdf.local
     - Recipes:
         href: http://recipes.local
+    - Speedtest:
+        href: http://speedtest.local
     - Teslamate:
         href: http://teslamate.local
     - Teslamate Grafana:
