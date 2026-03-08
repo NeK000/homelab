@@ -1,6 +1,7 @@
 services:
   budget:
     image: actualbudget/actual-server:26.3.0
+    user: "1000:1000"
     environment:
       TZ: Europe/Copenhagen
       ACTUAL_PORT: "5006"
@@ -29,11 +30,3 @@ networks:
   traefik-public:
     external: true
     name: traefik-public
-
-volumes:
-  budget_data:
-    driver: local
-    driver_opts:
-      type: "nfs"
-      o: "addr=${NFS_HOST},rw,nfsvers=${BUDGET_NFS_VERS:-4}"
-      device: ":/mnt/user/appdata-shared"

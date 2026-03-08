@@ -1,6 +1,7 @@
 services:
   mealie:
     image: ghcr.io/mealie-recipes/mealie:v3.11.0
+    user: "1000:1000"
     environment:
       TZ: Europe/Copenhagen
       ALLOW_SIGNUP: "true"
