@@ -41,19 +41,3 @@ services:
       - "${PATH_APPDATA_UNRAID}:/mnt"
     ports:
       - "8200:8200"
-  dozzle:
-    image: amir20/dozzle:v10.0
-    container_name: dozzle
-    restart: unless-stopped
-    labels:
-      tsdproxy.enable: "true"
-      tsdproxy.name: "dozzle"
-      tsdproxy.ephemeral: "true"
-      tsdproxy.container_port: "38080"
-      net.unraid.docker.managed: dockerman
-      net.unraid.docker.webui: http://[IP]:[PORT:38080]
-      net.unraid.docker.icon: https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/dozzle.png
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - "38080:8080"
