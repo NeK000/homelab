@@ -20,6 +20,12 @@
       "monitorGroup": "internal"
     },
     {
+      "name": "KaraKeep",
+      "url": "http://karakeep.local",
+      "homepageGroup": "Internal",
+      "monitorGroup": "internal"
+    },
+    {
       "name": "Speedtest",
       "url": "http://speedtest.local",
       "homepageGroup": "Internal",

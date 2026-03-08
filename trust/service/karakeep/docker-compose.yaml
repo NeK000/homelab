@@ -1,0 +1,76 @@
+services:
+  karakeep-chrome:
+    image: gcr.io/zenika-hub/alpine-chrome:124
+    command:
+      - --no-sandbox
+      - --disable-gpu
+      - --disable-dev-shm-usage
+      - --remote-debugging-address=0.0.0.0
+      - --remote-debugging-port=9222
+      - --hide-scrollbars
+    deploy:
+      restart_policy:
+        condition: on-failure
+    networks:
+      traefik-public:
+        aliases:
+          - karakeep-chrome
+
+  karakeep-meilisearch:
+    image: getmeili/meilisearch:v1.37.0
+    environment:
+      MEILI_NO_ANALYTICS: "true"
+      MEILI_MASTER_KEY: "${MEILI_MASTER_KEY}"
+    volumes:
+      - type: volume
+        source: nfs-share
+        target: /meili_data
+        volume:
+          subpath: karakeep-meili
+    deploy:
+      restart_policy:
+        condition: on-failure
+    networks:
+      traefik-public:
+        aliases:
+          - karakeep-meilisearch
+
+  karakeep:
+    image: ghcr.io/karakeep-app/karakeep:release
+    environment:
+      MEILI_ADDR: http://karakeep-meilisearch:7700
+      BROWSER_WEB_URL: http://karakeep-chrome:9222
+      DATA_DIR: /data
+      NEXTAUTH_URL: "${KARAKEEP_NEXTAUTH_URL:-http://karakeep.local}"
+      NEXTAUTH_SECRET: "${NEXTAUTH_SECRET}"
+    volumes:
+      - type: volume
+        source: nfs-share
+        target: /data
+        volume:
+          subpath: karakeep
+    networks:
+      traefik-public:
+        aliases:
+          - karakeep
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.name: "karakeep"
+      tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "3000"
+      traefik.enable: "true"
+      traefik.http.routers.karakeep.rule: "Host(`karakeep.local`) || Host(`karakeep`)"
+      traefik.http.routers.karakeep.entrypoints: "web"
+      traefik.http.services.karakeep.loadbalancer.server.port: "3000"
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+networks:
+  traefik-public:
+    external: true
+    name: traefik-public
+
+volumes:
+  nfs-share:
+    external: true
