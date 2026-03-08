@@ -24,6 +24,26 @@ services:
       restart_policy:
         condition: on-failure
 
+  kitchen-dash:
+    image: ghcr.io/gethomepage/homepage:v1.10.1
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.kitchendash.rule: "Host(`kitchen-dash.local`)"
+      traefik.http.routers.kitchendash.entrypoints: "web"
+      traefik.http.services.kitchendash.loadbalancer.server.port: "3000"
+      tsdproxy.enable: "false"
+    networks:
+      - traefik-public
+    environment:
+      PUID: 1000
+      PGID: 1000
+      HOMEPAGE_ALLOWED_HOSTS: "kitchen-dash.local"
+    volumes:
+      - "./kitchen-dash:/app/config:rw"
+    deploy:
+      restart_policy:
+        condition: on-failure
+
 networks:
   traefik-public:
     external: true
