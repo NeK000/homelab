@@ -57,6 +57,24 @@
       "homepageGroup": "Infrastructure"
     },
     {
+      "name": "ChatGPT",
+      "url": "https://chatgpt.com/",
+      "homepageGroup": "External",
+      "monitorEnabled": false
+    },
+    {
+      "name": "Tailscale",
+      "url": "https://tailscale.com/",
+      "homepageGroup": "External",
+      "monitorEnabled": false
+    },
+    {
+      "name": "Doppler",
+      "url": "https://dashboard.doppler.com/",
+      "homepageGroup": "External",
+      "monitorEnabled": false
+    },
+    {
       "name": "UniFi Admin",
       "url": "http://unifi.local",
       "homepageGroup": "External",
