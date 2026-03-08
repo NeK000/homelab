@@ -88,7 +88,7 @@
     },
     {
       "name": "Pi Hole",
-      "url": "http://pihole.local",
+      "url": "http://pihole.local/admin/",
       "homepageGroup": "Infrastructure",
       "monitorEnabled": false
     }
