@@ -8,6 +8,8 @@ services:
       - type: volume
         source: budget_data
         target: /data
+        volume:
+          subpath: budget
     networks:
       - traefik-public
     labels:
@@ -34,4 +36,4 @@ volumes:
     driver_opts:
       type: "nfs"
       o: "addr=${NFS_HOST},rw,nfsvers=${BUDGET_NFS_VERS:-4}"
-      device: ":/mnt/user/appdata-shared/budget"
+      device: ":/mnt/user/appdata-shared"
