@@ -14,6 +14,12 @@ endpoints:
     interval: 30s
     conditions:
       - "[STATUS] == 200"
+  - name: Budget
+    group: internal
+    url: http://budget.local
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
   - name: PDF
     group: internal
     url: http://pdf.local/login

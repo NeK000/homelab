@@ -3,6 +3,12 @@
 # Source of truth: trust/service/common/services.inventory.json
 
 - External:
+    - ChatGPT:
+        href: https://chatgpt.com/
+    - Doppler:
+        href: https://dashboard.doppler.com/
+    - Tailscale:
+        href: https://tailscale.com/
     - UniFi Admin:
         href: http://unifi.local
 
@@ -17,6 +23,8 @@
         href: http://tower.local
 
 - Internal:
+    - Budget:
+        href: http://budget.local
     - PDF:
         href: http://pdf.local
     - Recipes:

@@ -1,0 +1,37 @@
+services:
+  budget:
+    image: actualbudget/actual-server:26.3.0
+    environment:
+      TZ: Europe/Copenhagen
+      ACTUAL_PORT: "5006"
+    volumes:
+      - type: volume
+        source: budget_data
+        target: /data
+    networks:
+      - traefik-public
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.name: "budget"
+      tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "5006"
+      traefik.enable: "true"
+      traefik.http.routers.budget.rule: "Host(`budget.local`) || Host(`budget`)"
+      traefik.http.routers.budget.entrypoints: "web"
+      traefik.http.services.budget.loadbalancer.server.port: "5006"
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+networks:
+  traefik-public:
+    external: true
+    name: traefik-public
+
+volumes:
+  budget_data:
+    driver: local
+    driver_opts:
+      type: "nfs"
+      o: "addr=${NFS_HOST},rw,nfsvers=${BUDGET_NFS_VERS:-4}"
+      device: ":/mnt/user/appdata-shared/budget"
