@@ -26,6 +26,12 @@
       "monitorGroup": "internal"
     },
     {
+      "name": "Llama UI",
+      "url": "http://llama-ui.local",
+      "homepageGroup": "Internal",
+      "monitorGroup": "internal"
+    },
+    {
       "name": "PDF",
       "url": "http://pdf.local",
       "monitorPath": "/login",

@@ -1,27 +1,4 @@
 services:
-  llama-open-webui:
-    image: "ghcr.io/open-webui/open-webui:v0.8.8"
-    container_name: "open-webui"
-    restart: unless-stopped
-    environment:
-      TZ: "Europe/Paris"
-      HOST_OS: "Unraid"
-      HOST_HOSTNAME: "Tower"
-      HOST_CONTAINERNAME: "open-webui"
-      OLLAMA_BASE_URL: "http://10.10.1.20:11434"
-      CA_TS_FALLBACK_DIR: "/app/backend/data"
-    labels:
-      tsdproxy.enable: "true"
-      tsdproxy.name: "llama-ui"
-      tsdproxy.ephemeral: "true"
-      net.unraid.docker.managed: "dockerman"
-      net.unraid.docker.webui: "http://[IP]:[PORT:8081]/"
-      net.unraid.docker.icon: "https://raw.githubusercontent.com/open-webui/open-webui/main/static/favicon.png"
-    ports:
-      - "8081:8080"
-    volumes:
-      - "${PATH_APPDATA_UNRAID}/ollama-webui:/app/backend/data"
-
   llama-ollama:
     image: "ollama/ollama:0.17.7"
     container_name: "ollama"

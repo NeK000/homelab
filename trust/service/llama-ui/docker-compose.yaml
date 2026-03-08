@@ -1,0 +1,36 @@
+services:
+  llama-ui:
+    image: ghcr.io/open-webui/open-webui:v0.8.8
+    environment:
+      TZ: Europe/Copenhagen
+      OLLAMA_BASE_URL: "${OLLAMA_BASE_URL:-http://10.10.1.20:11434}"
+      CA_TS_FALLBACK_DIR: /app/backend/data
+    volumes:
+      - type: volume
+        source: nfs-share
+        target: /app/backend/data
+        volume:
+          subpath: llama-ui
+    networks:
+      - traefik-public
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.name: "llama-ui"
+      tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "8080"
+      traefik.enable: "true"
+      traefik.http.routers.llama-ui.rule: "Host(`llama-ui.local`) || Host(`llama-ui`)"
+      traefik.http.routers.llama-ui.entrypoints: "web"
+      traefik.http.services.llama-ui.loadbalancer.server.port: "8080"
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+networks:
+  traefik-public:
+    external: true
+    name: traefik-public
+
+volumes:
+  nfs-share:
+    external: true
