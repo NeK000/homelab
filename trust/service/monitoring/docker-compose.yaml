@@ -1,4 +1,3 @@
-version: "3.9"
 configs:
   gatus_config:
     file: ./config/config.yaml
