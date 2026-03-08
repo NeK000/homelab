@@ -20,6 +20,19 @@
       "monitorGroup": "internal"
     },
     {
+      "name": "Registry",
+      "url": "http://registry.local",
+      "monitorPath": "/v2/",
+      "homepageGroup": "Internal",
+      "monitorGroup": "internal"
+    },
+    {
+      "name": "Registry UI",
+      "url": "http://registry-ui.local",
+      "homepageGroup": "Internal",
+      "monitorGroup": "internal"
+    },
+    {
       "name": "Budget",
       "url": "http://budget.local",
       "homepageGroup": "Internal",

@@ -1,0 +1,61 @@
+services:
+  registry:
+    image: registry:2.8.3
+    environment:
+      TZ: Europe/Copenhagen
+      REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /var/lib/registry
+      REGISTRY_STORAGE_DELETE_ENABLED: "true"
+    volumes:
+      - type: volume
+        source: nfs-share
+        target: /var/lib/registry
+        volume:
+          subpath: registry
+    networks:
+      - traefik-public
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.name: "registry"
+      tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "5000"
+      traefik.enable: "true"
+      traefik.http.routers.registry.rule: "Host(`registry.local`) || Host(`registry`)"
+      traefik.http.routers.registry.entrypoints: "web"
+      traefik.http.services.registry.loadbalancer.server.port: "5000"
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  registry-ui:
+    image: joxit/docker-registry-ui:latest
+    environment:
+      TZ: Europe/Copenhagen
+      REGISTRY_TITLE: Local Registry
+      REGISTRY_URL: http://registry:5000
+      SINGLE_REGISTRY: "true"
+      DELETE_IMAGES: "true"
+      SHOW_CONTENT_DIGEST: "true"
+      NGINX_PROXY_PASS_URL: http://registry:5000
+    networks:
+      - traefik-public
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.name: "registry-ui"
+      tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "80"
+      traefik.enable: "true"
+      traefik.http.routers.registryui.rule: "Host(`registry-ui.local`) || Host(`registry-ui`)"
+      traefik.http.routers.registryui.entrypoints: "web"
+      traefik.http.services.registryui.loadbalancer.server.port: "80"
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+networks:
+  traefik-public:
+    external: true
+    name: traefik-public
+
+volumes:
+  nfs-share:
+    external: true

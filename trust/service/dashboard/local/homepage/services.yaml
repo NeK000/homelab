@@ -35,6 +35,10 @@
         href: http://pdf.local
     - Recipes:
         href: http://recipes.local
+    - Registry:
+        href: http://registry.local
+    - Registry UI:
+        href: http://registry-ui.local
     - Speedtest:
         href: http://speedtest.local
     - Teslamate:

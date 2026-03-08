@@ -50,6 +50,18 @@ endpoints:
     interval: 30s
     conditions:
       - "[STATUS] == 200"
+  - name: Registry
+    group: internal
+    url: http://registry.local/v2/
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+  - name: Registry UI
+    group: internal
+    url: http://registry-ui.local
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
   - name: Speedtest
     group: internal
     url: http://speedtest.local

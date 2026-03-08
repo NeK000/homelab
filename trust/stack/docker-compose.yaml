@@ -5,6 +5,7 @@ include:
   - ../service/network/tsdproxy/docker-compose.yaml
   - ../service/monitoring/docker-compose.yaml
   - ../service/budget/docker-compose.yaml
+  - ../service/registry/docker-compose.yaml
   - ../service/karakeep/docker-compose.yaml
   - ../service/librespeed/docker-compose.yaml
   - ../service/llama-ui/docker-compose.yaml
