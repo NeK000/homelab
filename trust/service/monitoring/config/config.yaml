@@ -26,6 +26,12 @@ endpoints:
     interval: 30s
     conditions:
       - "[STATUS] == 200"
+  - name: Kitchen dash
+    group: internal
+    url: http://kitchen-dash.local
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
   - name: Llama UI
     group: internal
     url: http://llama-ui.local

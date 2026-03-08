@@ -14,6 +14,12 @@
   },
   "services": [
     {
+      "name": "Kitchen dash",
+      "url": "http://kitchen-dash.local",
+      "homepageGroup": "Internal",
+      "monitorGroup": "internal"
+    },
+    {
       "name": "Budget",
       "url": "http://budget.local",
       "homepageGroup": "Internal",
