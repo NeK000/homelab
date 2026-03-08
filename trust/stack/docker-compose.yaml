@@ -1,4 +1,4 @@
-name: trust
+name: trust-swarm
 
 include:
   - ../service/network/traefik/docker-compose.yaml
