@@ -5,6 +5,11 @@ services:
       TZ: Europe/Copenhagen
       REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /var/lib/registry
       REGISTRY_STORAGE_DELETE_ENABLED: "true"
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Origin: '[http://registry-ui.local]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Methods: '[HEAD,GET,OPTIONS,DELETE]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Credentials: '[true]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Headers: '[Authorization,Accept,Cache-Control]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Expose-Headers: '[Docker-Content-Digest]'
     volumes:
       - type: volume
         source: nfs-share
@@ -31,11 +36,11 @@ services:
     environment:
       TZ: Europe/Copenhagen
       REGISTRY_TITLE: Local Registry
-      REGISTRY_URL: http://registry:5000
+      REGISTRY_URL: http://registry.local
       SINGLE_REGISTRY: "true"
       DELETE_IMAGES: "true"
       SHOW_CONTENT_DIGEST: "true"
-      NGINX_PROXY_PASS_URL: http://registry:5000
+      NGINX_PROXY_PASS_URL: http://registry.local
     networks:
       - traefik-public
     labels:
