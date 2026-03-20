@@ -4,7 +4,7 @@ configs:
 
 services:
   traefik:
-    image: traefik:v3.6.9
+    image: traefik:v3.6.11
     ports:
       - "80:80"
     configs:
