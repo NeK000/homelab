@@ -1,6 +1,6 @@
 services:
   registry:
-    image: registry:2.8.3
+    image: registry:3.0.0
     environment:
       TZ: Europe/Copenhagen
       REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /var/lib/registry
