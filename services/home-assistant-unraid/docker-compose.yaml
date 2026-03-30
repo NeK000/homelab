@@ -1,0 +1,17 @@
+services:
+  home-assistant-unraid:
+    image: ghcr.io/idmedia/hass-unraid:2.1.5
+    restart: unless-stopped
+    network_mode: bridge
+    pid: host
+    pids_limit: 2048
+    environment:
+      TZ: Europe/Copenhagen
+      HOST_OS: Unraid
+      HOST_HOSTNAME: Homelab
+      HOST_CONTAINERNAME: home-assistant-unraid
+    labels:
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/IDmedia/hass-unraid/main/extras/logo.png"
+    volumes:
+      - "${PATH_APPDATA_UNRAID}/hass-unraid:/data"

@@ -1,0 +1,12 @@
+name: homelab-services
+
+include:
+  - ../network/docker-compose.yaml
+  - ../nginx-proxy-manager/docker-compose.yaml
+  - ../home-assistant-unraid/docker-compose.yaml
+  - ../backup/docker-compose.yaml
+  - ../llama/docker-compose.yaml
+  - ../immich/docker-compose.yaml
+  - ../jellyfin/docker-compose.yaml
+  - ../paperless-ngx/docker-compose.yaml
+  - ../pgadmin4/docker-compose.yaml

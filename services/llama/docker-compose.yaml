@@ -1,30 +1,26 @@
 services:
-  llama-ollama:
-    image: "ollama/ollama:0.18.2"
-    container_name: "ollama"
+  ollama:
+    image: ollama/ollama:0.17.7
     restart: unless-stopped
+    runtime: nvidia
     ports:
       - "11434:11434"
     environment:
-      TZ: "Europe/Paris"
-      HOST_OS: "Unraid"
-      HOST_HOSTNAME: "Tower"
-      HOST_CONTAINERNAME: "ollama"
+      TZ: Europe/Copenhagen
+      HOST_OS: Unraid
+      HOST_HOSTNAME: Homelab
+      HOST_CONTAINERNAME: ollama
       OLLAMA_ORIGINS: "*"
-      CA_TS_FALLBACK_DIR: "/root/.ollama"
+      CA_TS_FALLBACK_DIR: /root/.ollama
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: all
     labels:
       tsdproxy.enable: "true"
       tsdproxy.name: "ollama"
       tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "11434"
       net.unraid.docker.managed: "dockerman"
       net.unraid.docker.webui: "http://[IP]:[PORT:11434]/"
       net.unraid.docker.icon: "https://ollama.ai/public/ollama.png"
     volumes:
-      - "${PATH_APPDATA_UNRAID}/ollama:/root/.ollama:rw"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: "nvidia"
-              count: "all"
-              capabilities: ["gpu"]
+      - "${PATH_APPDATA_UNRAID}/ollama:/root/.ollama"

@@ -1,0 +1,20 @@
+services:
+  backup:
+    image: duplicati/duplicati:2.2.1.0
+    restart: unless-stopped
+    environment:
+      SETTINGS_ENCRYPTION_KEY: "${DUPLICATI_SETTINGS_ENCRYPTION_KEY}"
+      DUPLICATI__WEBSERVICE_PASSWORD: "${DUPLICATI__WEBSERVICE_PASSWORD}"
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.name: "backup"
+      tsdproxy.ephemeral: "true"
+      tsdproxy.container_port: "8200"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8200]"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duplicati-logo.png"
+    volumes:
+      - "${PATH_APPDATA_UNRAID}/duplicati-config:/data"
+      - "${PATH_APPDATA_UNRAID}:/mnt"
+    ports:
+      - "8200:8200"

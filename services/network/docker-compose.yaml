@@ -1,7 +1,6 @@
 services:
-  network-tsdproxy:
-    image: "almeidapaulopt/tsdproxy:1.4.7"
-    container_name: "tsdproxy"
+  tsdproxy:
+    image: almeidapaulopt/tsdproxy:1.4.7
     restart: unless-stopped
     labels:
       net.unraid.docker.managed: "dockerman"
@@ -10,6 +9,6 @@ services:
     ports:
       - "${PORT_NETWORK_TSDPROXY}:8080"
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - /var/run/docker.sock:/var/run/docker.sock
       - "${PATH_APPDATA_UNRAID}/tower/tsdproxy:/data"
       - "${PATH_APPDATA_UNRAID}/tower/tsdproxy-config:/config"
