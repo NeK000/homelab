@@ -8,7 +8,7 @@ services:
       - "${PATH_APPDATA_UNRAID}/paperless/redis-data:/data"
 
   gotenberg:
-    image: docker.io/gotenberg/gotenberg:8.27
+    image: docker.io/gotenberg/gotenberg:8.29
     restart: unless-stopped
     labels:
       net.unraid.docker.icon: "https://raw.githubusercontent.com/sgraaf/Unraid-Docker-Templates/main/gotenberg/icon.png"
