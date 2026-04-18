@@ -1,6 +1,6 @@
 services:
   budget:
-    image: actualbudget/actual-server:26.3.0
+    image: actualbudget/actual-server:26.4.0
     environment:
       TZ: Europe/Copenhagen
       ACTUAL_PORT: "5006"
