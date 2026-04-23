@@ -1,6 +1,6 @@
 services:
   jellyfin:
-    image: lscr.io/linuxserver/jellyfin:10.11.6
+    image: lscr.io/linuxserver/jellyfin:10.11.8
     restart: unless-stopped
     entrypoint: /opt/unraid/tailscale
     network_mode: bridge
