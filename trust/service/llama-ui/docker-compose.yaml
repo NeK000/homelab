@@ -1,6 +1,6 @@
 services:
   llama-ui:
-    image: ghcr.io/open-webui/open-webui:v0.8.10
+    image: ghcr.io/open-webui/open-webui:v0.9.2
     environment:
       TZ: Europe/Copenhagen
       OLLAMA_BASE_URL: "${OLLAMA_BASE_URL:-http://10.10.1.20:11434}"
