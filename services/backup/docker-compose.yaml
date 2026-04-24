@@ -1,6 +1,6 @@
 services:
   backup:
-    image: duplicati/duplicati:2.2.1.0
+    image: duplicati/duplicati:2.3.0.1
     restart: unless-stopped
     environment:
       SETTINGS_ENCRYPTION_KEY: "${DUPLICATI_SETTINGS_ENCRYPTION_KEY}"
