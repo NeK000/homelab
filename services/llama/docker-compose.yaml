@@ -1,6 +1,6 @@
 services:
   ollama:
-    image: ollama/ollama:0.17.7
+    image: ollama/ollama:0.23.0
     restart: unless-stopped
     runtime: nvidia
     ports:
