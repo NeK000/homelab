@@ -1,6 +1,6 @@
 services:
   home-assistant-unraid:
-    image: ghcr.io/idmedia/hass-unraid:2.1.5
+    image: ghcr.io/idmedia/hass-unraid:2.1.7
     restart: unless-stopped
     network_mode: bridge
     pid: host
